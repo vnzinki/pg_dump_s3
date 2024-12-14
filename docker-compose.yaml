@@ -1,0 +1,6 @@
+services:
+  backup:
+    build: .
+    command:
+      - ping
+      - 1.1.1.1
