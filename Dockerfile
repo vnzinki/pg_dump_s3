@@ -1,7 +1,10 @@
-FROM alpine:latest
+FROM alpine
 
-ARG PG_VERSION=latest
-ARG AWSCLI_VERSION=latest
+ARG PG_VERSION
 
-RUN apk add postgresql-client=${PG_VERSION} \
-  && aws-cli=${AWSCLI_VERSION}
+RUN apk add --no-cache \
+  "postgresql${PG_VERSION}-client" \
+  aws-cli
+
+COPY backup.sh restore.sh ./
+RUN chmod +x ./backup.sh ./restore.sh
